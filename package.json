@@ -1,0 +1,31 @@
+{
+  "name": "steamgriddb",
+  "version": "1.0.0",
+  "description": "Node.js Wrapper for the SteamGridDB API",
+  "main": "src/SGDB.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/steamgriddb/node-steamgriddb.git"
+  },
+  "keywords": [
+    "sgdb",
+    "steamgriddb",
+    "steam",
+    "api",
+    "wrapper"
+  ],
+  "author": "Jozen Martinez (https://www.steamgriddb.com)",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "mocha": "^6.1.4",
+    "nock": "^10.0.6"
+  }
+}
