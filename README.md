@@ -1,6 +1,7 @@
 # SteamGridDB for Node.js
-[![npm](https://img.shields.io/npm/v/steamgriddb.svg?style=for-the-badge)](https://www.npmjs.com/package/steamgriddb)
-[![license](https://img.shields.io/npm/l/steamgriddb.svg?style=for-the-badge)](/blob/master/LICENSE.md)  
+[![npm](https://img.shields.io/npm/v/steamgriddb.svg?color=%23CB3837&logo=npm&style=for-the-badge)](https://www.npmjs.com/package/steamgriddb)
+[![license](https://img.shields.io/npm/l/steamgriddb.svg?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGFyaWEtaGlkZGVuPSJ0cnVlIiB2aWV3Qm94PSIwIDAgMTQgMTYiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik03IDRhMS41IDEuNSAwIDEgMSAwLTMgMS41IDEuNSAwIDAgMSAwIDN6bTcgNmEyIDIgMCAwIDEtMiAyaC0xYTIgMiAwIDAgMS0yLTJsMi00aC0xYTEgMSAwIDAgMS0xLTFIOHY4Yy40MiAwIDEgLjQ1IDEgMWgxYy40MiAwIDEgLjQ1IDEgMUgzYzAtLjU1LjU4LTEgMS0xaDFjMC0uNTUuNTgtMSAxLTFoLjAzTDYgNUg1YTEgMSAwIDAgMS0xIDFIM2wyIDRhMiAyIDAgMCAxLTIgMkgyYTIgMiAwIDAgMS0yLTJsMi00SDFWNWgzYTEgMSAwIDAgMSAxLTFoNGExIDEgMCAwIDEgMSAxaDN2MWgtMWwyIDR6TTIuNSA3TDEgMTBoM0wyLjUgN3pNMTMgMTBsLTEuNS0zLTEuNSAzaDN6Ii8+PC9zdmc+)](/LICENSE.md)
+[![license](https://img.shields.io/discord/488621078302949377.svg?color=%237289DA&label=Discord&logo=discord&logoColor=%238ea7ff&style=for-the-badge)](https://discord.gg/2jYnUej)  
 A Node.js wrapper for the SteamGridDB API.
 
 ### Installation
@@ -10,7 +11,10 @@ npm install steamgriddb
 ```
 
 ## Getting Started
-Require the library into your project.
+#### Get your API key
+[You can generate an API key on the preferences page.](https://www.steamgriddb.com/profile/preferences)
+
+#### Require the library into your project.
 ```js
 const SGDB = require('steamgriddb');
 ```
