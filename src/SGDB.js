@@ -35,6 +35,8 @@ class SGDB {
     /**
      * @param {String} url API endpoint to append to baseURL
      * @param {String} method HTTP method
+     * @param {Object} params
+     * @param {Object} formData
      * @return {Promise<Object>}
      */
     _handleRequest(method, url, params, formData = null) {
@@ -136,7 +138,7 @@ class SGDB {
     }
 
     /**
-     * @param {integer} id Game ID
+     * @param {Number} id Game ID
      * @param {(Array|Undefined)} styles Array of grid styles.
      * @return {Promise<Object>} JSON grid response
      */
@@ -145,7 +147,7 @@ class SGDB {
     }
 
     /**
-     * @param {integer} id Steam App ID
+     * @param {Number} id Steam App ID
      * @param {(Array|Undefined)} styles Array of grid styles.
      * @return {Promise<Object>} JSON grid response
      */
@@ -193,14 +195,14 @@ class SGDB {
     }
 
     /**
-     * @param  {Number} Game ID.
-     * @param  {String} Style name.
-     * @param  {Grid} File stream
+     * @param  {Number} id Game ID.
+     * @param  {String} style Style name.
+     * @param  {stream.Writable} grid File stream
      * @return {Boolean}
      */
-    uploadGrid(gameId, style, grid) {
+    uploadGrid(id, style, grid) {
         const formData = {
-            game_id: gameId,
+            game_id: id,
             style: style,
             grid: grid
         };
@@ -218,7 +220,7 @@ class SGDB {
     }
 
     /**
-     * @param  {(Number|Array)} Grid ID or array of IDs to delete
+     * @param  {(Number|Array)} ids Grid ID or array of IDs to delete
      * @return {Promise<Boolean>}
      */
     deleteGrids(ids) {
@@ -241,7 +243,7 @@ class SGDB {
 
     /**
      * @param  {String} term Search term
-     * @return {[type]}
+     * @return {Promise<Object>}
      */
     searchGame(term) {
         return new Promise((resolve, reject) => {
