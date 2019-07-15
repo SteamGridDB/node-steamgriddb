@@ -76,7 +76,7 @@ class SGDB {
      * @return {Promise<Object>} JSON game response
      */
     getGame(options) {
-        if (!['id','steam'].includes(options.type)) {
+        if (!['id','steam','egs','origin','gog','uplay'].includes(options.type)) {
             return new TypeError('Invalid ID type. Must be "id" or "steam".');
         }
 
