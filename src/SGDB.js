@@ -71,15 +71,11 @@ class SGDB {
 
     /**
      * @param {Object} options
-     * @param {String} options.type ID Type. Should be "id" or "steam"
+     * @param {String} options.type ID Type.
      * @param {Number} options.id Game ID. Could be Steam App ID or game ID
      * @return {Promise<Object>} JSON game response
      */
     getGame(options) {
-        if (!['id','steam','egs','origin','gog','uplay'].includes(options.type)) {
-            return new TypeError('Invalid ID type. Must be "id" or "steam".');
-        }
-
         return new Promise((resolve, reject) => {
             this._handleRequest('get', `/games/${options.type}/${options.id}`)
                 .then((res) => {
@@ -111,15 +107,11 @@ class SGDB {
     /**
      * @param {Object} options
      * @param {Number} options.id Game ID. Could be Steam App ID or game ID
-     * @param {String} options.type ID Type. Should be "id" or "steam"
+     * @param {String} options.type ID Type.
      * @param {(Array|Undefined)} options.styles Array of grid styles.
      * @return {Promise<Object>} JSON grids response
      */
     getGrids(options) {
-        if (!['game','steam'].includes(options.type)) {
-            return new TypeError('Invalid ID type. Must be "id" or "steam".');
-        }
-
         let stylesParam = null;
         if (typeof options.styles !== 'undefined') {
             stylesParam = {styles: options.styles.join(',')};
