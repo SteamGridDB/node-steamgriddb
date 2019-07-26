@@ -248,3 +248,18 @@ client.deleteGrids([80,81,82,83])
         console.log(err);
     });
 ```
+
+#### Handling errors:
+```js
+// Try to delete a grid you don't own
+client.deleteGrids(34312)
+    .then((res) => {
+        console.log(res); // you don't own the grid so this wont happen
+    })
+    .catch((err) => {
+        console.log(err.message); // "This grid isn't yours."
+
+        // If needed, you can access the response object with err.response
+        console.log(err.response.statusCode); // 403
+    });
+```

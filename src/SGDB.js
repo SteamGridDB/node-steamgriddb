@@ -40,7 +40,7 @@ class SGDB {
      * @return {Promise<Object>}
      */
     _handleRequest(method, url, params, formData = null) {
-        let options = { uri: `${this.baseURL}${url}`, headers: this.headers, method: method, qs: params, simple: false };
+        let options = { uri: `${this.baseURL}${url}`, headers: this.headers, method: method, qs: params, simple: false, json: true, resolveWithFullResponse: true };
         if (formData) {
             options = {...options, ...{formData: formData}};
         }
@@ -48,19 +48,14 @@ class SGDB {
         return new Promise((resolve, reject) => {
             request(options)
                 .then((response) => {
-                    try {
-                        JSON.parse(response);
-                    } catch (err) {
-                        reject(new Error('Server responded with invalid JSON.'));
-                    }
-
-                    const json = JSON.parse(response);
+                    const json = response.body;
                     if (json.success) {
                         resolve(json); // Return whole output so each function can handle differently
                     }
-
                     if (!json.success) {
-                        reject(new Error(json.errors));
+                        let error = new Error(json.errors);
+                        error.response = response; // attach response to error
+                        reject(error);
                     }
                 })
                 .catch((err) => {
