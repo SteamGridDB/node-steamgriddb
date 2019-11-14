@@ -104,16 +104,19 @@ class SGDB {
      * @param {Number} options.id Game ID. Could be Steam App ID or game ID
      * @param {String} options.type ID Type.
      * @param {(Array|Undefined)} options.styles Array of grid styles.
+     * @param {(Array|Undefined)} options.dimensions Array of grid dimensions.
      * @return {Promise<Object>} JSON grids response
      */
     getGrids(options) {
-        let stylesParam = null;
+        let params = {};
         if (typeof options.styles !== 'undefined') {
-            stylesParam = {styles: options.styles.join(',')};
+            params.styles = options.styles.join(',');
         }
-
+        if (typeof options.dimensions !== 'undefined') {
+            params.dimensions = options.dimensions.join(',');
+        }
         return new Promise((resolve, reject) => {
-            this._handleRequest('get', `/grids/${options.type}/${options.id}`, stylesParam)
+            this._handleRequest('get', `/grids/${options.type}/${options.id}`, params)
                 .then((res) => {
                     if (res.success) {
                         resolve(res.data);
@@ -125,21 +128,23 @@ class SGDB {
     }
 
     /**
-     * @param {Number} id Game ID
+     * @param {Number} id Game ID on SteamGridDB
      * @param {(Array|Undefined)} styles Array of grid styles.
+     * @param {(Array|Undefined)} dimensions Array of grid dimensions.
      * @return {Promise<Object>} JSON grid response
      */
-    getGridsById(id, styles) {
-        return this.getGrids({type: 'game', id: id, styles: styles});
+    getGridsById(id, styles, dimensions) {
+        return this.getGrids({type: 'game', id: id, styles: styles, dimensions: dimensions});
     }
 
     /**
      * @param {Number} id Steam App ID
      * @param {(Array|Undefined)} styles Array of grid styles.
+     * @param {(Array|Undefined)} dimensions Array of grid dimensions.
      * @return {Promise<Object>} JSON grid response
      */
-    getGridsBySteamAppId(id, styles) {
-        return this.getGrids({type: 'steam', id: id, styles: styles});
+    getGridsBySteamAppId(id, styles, dimensions) {
+        return this.getGrids({type: 'steam', id: id, styles: styles, dimensions: dimensions});
     }
 
     /**
