@@ -128,6 +128,34 @@ class SGDB {
     }
 
     /**
+     * @param {Object} options
+     * @param {Number} options.id Game ID. Could be Steam App ID or game ID
+     * @param {String} options.type ID Type.
+     * @param {(Array|Undefined)} options.styles Array of hero styles.
+     * @param {(Array|Undefined)} options.dimensions Array of hero dimensions.
+     * @return {Promise<Object>} JSON heroes response
+     */
+    getHeroes(options) {
+        let params = {};
+        if (typeof options.styles !== 'undefined') {
+            params.styles = options.styles.join(',');
+        }
+        if (typeof options.dimensions !== 'undefined') {
+            params.dimensions = options.dimensions.join(',');
+        }
+        return new Promise((resolve, reject) => {
+            this._handleRequest('get', `/heroes/${options.type}/${options.id}`, params)
+                .then((res) => {
+                    if (res.success) {
+                        resolve(res.data);
+                    }
+                }).catch((err) => {
+                    reject(err);
+                });
+        });
+    }
+
+    /**
      * @param {Number} id Game ID on SteamGridDB
      * @param {(Array|Undefined)} styles Array of grid styles.
      * @param {(Array|Undefined)} dimensions Array of grid dimensions.
