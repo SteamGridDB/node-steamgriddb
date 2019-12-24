@@ -15,7 +15,7 @@ class SGDB {
             this.baseURL = options.baseURL;
         }
         if (options.headers) {
-            this.headers = {...options.headers};
+            this.headers = Object.assign({}, options.headers);
         }
         if (options.key) {
             this.key = options.key;
@@ -42,7 +42,7 @@ class SGDB {
     _handleRequest(method, url, params, formData = null) {
         let options = { uri: `${this.baseURL}${url}`, headers: this.headers, method: method, qs: params, simple: false, json: true, resolveWithFullResponse: true };
         if (formData) {
-            options = {...options, ...{formData: formData}};
+            options = Object.assign({},options,{formData: formData});
         }
 
         return new Promise((resolve, reject) => {
