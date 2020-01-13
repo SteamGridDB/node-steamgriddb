@@ -154,6 +154,19 @@ class SGDB {
                 });
         });
     }
+    getLogos(options) {
+      let params = {};
+      return new Promise((resolve, reject)=>{
+        this._handleRequest('get',`/logos/${options.type}/${options.id}`)
+          .then((res) => {
+            if (res.success) {
+              resolve(res.data);
+            }
+          }).catch((err)=>{
+            reject(err);
+          });
+      });
+    }
 
     /**
      * @param {Number} id Game ID on SteamGridDB
