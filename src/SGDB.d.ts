@@ -7,6 +7,7 @@ export default class SGDB {
   getGrids(options: any): Promise<any>;
   getHeroes(options: any): Promise<any>;
   getLogos(options: any): Promise<any>;
+  getIcons(options: any): Promise<any>;
   getGridsById(id: number, styles: any, dimensions: any): Promise<any>;
   getGridsBySteamAppId(id: number, styles: any, dimensions: any): Promise<any>;
   voteGrid(options: any): Promise<any>;
