@@ -126,7 +126,7 @@ class SGDB {
   }
   getGrids(options) {
     return new Promise((resolve, reject) => {
-      this._handleRequest('get', `/grids/${options.type}/${options.id}`, buildQuery(options))
+      this._handleRequest('get', `/grids/${options.type}/${options.id}`, this.buildQuery(options))
         .then((res) => {
           if (res.success) {
             resolve(res.data);
@@ -151,7 +151,7 @@ class SGDB {
    */
   getHeroes(options) {
     return new Promise((resolve, reject) => {
-      this._handleRequest('get', `/heroes/${options.type}/${options.id}`, buildQuery(options))
+      this._handleRequest('get', `/heroes/${options.type}/${options.id}`, this.buildQuery(options))
         .then((res) => {
           if (res.success) {
             resolve(res.data);
@@ -176,7 +176,7 @@ class SGDB {
    */
   getLogos(options) {
     return new Promise((resolve, reject)=>{
-      this._handleRequest('get',`/logos/${options.type}/${options.id}`, buildQuery(options))
+      this._handleRequest('get',`/logos/${options.type}/${options.id}`, this.buildQuery(options))
         .then((res) => {
           if (res.success) {
             resolve(res.data);
@@ -201,7 +201,7 @@ class SGDB {
    */
   getIcons(options) {
     return new Promise((resolve, reject)=>{
-      this._handleRequest('get',`/icons/${options.type}/${options.id}`, buildQuery(options))
+      this._handleRequest('get',`/icons/${options.type}/${options.id}`, this.buildQuery(options))
         .then((res) => {
           if (res.success) {
             resolve(res.data);
