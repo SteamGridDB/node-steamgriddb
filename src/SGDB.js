@@ -114,12 +114,12 @@ class SGDB {
     let params = {};
     for(let queryParam of this.multiParams) {
       if (typeof options[queryParam] !== 'undefined' && options[queryParam].length){
-        params[queryParam] = options[queryParam].join(',')
+        params[queryParam] = options[queryParam].join(',');
       }
     }
     for(let queryParam of this.singleParams) {
       if (typeof options[queryParam] !== 'undefined'){
-        params[queryParam] = options[queryParam]
+        params[queryParam] = options[queryParam];
       }
     }
     return params;
