@@ -4,7 +4,8 @@
   "description": "Node.js Wrapper for the SteamGridDB API",
   "main": "src/SGDB.js",
   "scripts": {
-    "test": "mocha"
+    "test": "npm run lint && mocha",
+    "lint": "eslint --max-warnings=0 src/** test/**"
   },
   "repository": {
     "type": "git",

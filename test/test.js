@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 const assert = require('assert');
 const nock = require('nock');
 const {describe, it} = require('mocha');
