@@ -113,7 +113,7 @@ class SGDB {
   buildQuery(options) {
     let params = {};
     for(let queryParam of this.multiParams) {
-      if (typeof options[queryParam] !== 'undefined'){
+      if (typeof options[queryParam] !== 'undefined' && options[queryParam].length){
         params[queryParam] = options[queryParam].join(',')
       }
     }
