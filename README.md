@@ -1,11 +1,9 @@
-# SteamGridDB for Node.js
+# SteamGridDB API
 [![npm](https://img.shields.io/npm/v/steamgriddb.svg?color=%23CB3837&logo=npm&style=for-the-badge)](https://www.npmjs.com/package/steamgriddb)
 [![license](https://img.shields.io/npm/l/steamgriddb.svg?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGFyaWEtaGlkZGVuPSJ0cnVlIiB2aWV3Qm94PSIwIDAgMTQgMTYiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik03IDRhMS41IDEuNSAwIDEgMSAwLTMgMS41IDEuNSAwIDAgMSAwIDN6bTcgNmEyIDIgMCAwIDEtMiAyaC0xYTIgMiAwIDAgMS0yLTJsMi00aC0xYTEgMSAwIDAgMS0xLTFIOHY4Yy40MiAwIDEgLjQ1IDEgMWgxYy40MiAwIDEgLjQ1IDEgMUgzYzAtLjU1LjU4LTEgMS0xaDFjMC0uNTUuNTgtMSAxLTFoLjAzTDYgNUg1YTEgMSAwIDAgMS0xIDFIM2wyIDRhMiAyIDAgMCAxLTIgMkgyYTIgMiAwIDAgMS0yLTJsMi00SDFWNWgzYTEgMSAwIDAgMSAxLTFoNGExIDEgMCAwIDEgMSAxaDN2MWgtMWwyIDR6TTIuNSA3TDEgMTBoM0wyLjUgN3pNMTMgMTBsLTEuNS0zLTEuNSAzaDN6Ii8+PC9zdmc+)](/LICENSE.md)
 [![license](https://img.shields.io/discord/488621078302949377.svg?color=%237289DA&label=Discord&logo=discord&logoColor=%238ea7ff&style=for-the-badge)](https://discord.gg/2jYnUej)  
-A Node.js wrapper for the SteamGridDB API.
 
-### Installation
-
+## Installation
 ```bash
 npm install steamgriddb
 ```
@@ -15,39 +13,52 @@ npm install steamgriddb
 [You can generate an API key on the preferences page.](https://www.steamgriddb.com/profile/preferences)
 
 #### Require the library into your project.
-```js
-const SGDB = require('steamgriddb');
+```ts
+import SGDB from "steamgriddb";
 ```
 
 #### Pass your API key into the constructor:
-```js
+```ts
 const client = new SGDB('your_api_key');
 ```
 
 Optionally, you can pass an object with some settings:
-```js
+```ts
 const client = new SGDB({
-  key: 'your_api_key',
-  // Array of headers to send with each request
-  headers: {
-    'X-Some-Header': 'Some Value',
-  },
-  baseURL: 'https://www.steamgriddb.com/api/v2'
+    key: 'your_api_key',
+    headers: {
+        'X-Some-Header': 'Some Value',
+    },
+    baseURL: 'https://www.steamgriddb.com/api/v2'
 });
 ```
 
-#### Search for a game:
+## Usage
+Although these code examples use [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await),
+SteamGridDB can also be used with `.then()` and `.catch()`.
+
+<details>
+    <summary>Example</summary>
+
 ```js
-client.searchGame('Half-Life 2')
-    .then((output) => {
-        console.log(output);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+    client.getGrids({type: 'game', id: 2254})
+        .then((grids) => {
+            console.log(grids);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+```
+</details>
+
+### Search for a game:
+```ts
+const games = await client.searchGame('Half-Life 2');
 ```
 
-That outputs:
+<details>
+    <summary>Output</summary>
+
 ```json
 [
   {
@@ -84,66 +95,43 @@ That outputs:
   }
 ]
 ```
+</details>
 
-#### Get some grids:
-```js
-// Get grids by game ID
-client.getGrids({type: 'game', id: 2254}) // 2254 = Game ID we got from searchGame()
-    .then((output) => {
-        console.log(output);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-    
+### Get grids By Game ID
+```ts
+// 2254 = Game ID we got from searchGame()
+const grids = await client.getGrids({type: 'game', id: 2254}); 
+```
+
+```ts
+// 2254 = Game ID we got from searchGame()
+const grids = await client.getGridsById(2254);
+```
+
+### Get grids by Steam App ID
+```ts
 // Get grid by Steam App Id
-client.getGrids({type: 'steam', id: 220}) // 220 = https://store.steampowered.com/app/220/HalfLife_2/
-    .then((output) => {
-        console.log(output);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-    
-// Alternatively, you can do it like this:
-client.getGridsById(2254)
-    .then((output) => {
-        console.log(output);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-    
-client.getGridsBySteamAppId(220)
-    .then((output) => {
-        console.log(output);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+// 220 = https://store.steampowered.com/app/220/HalfLife_2/
+const grids = await client.getGrids({type: 'steam', id: 220});
 ```
 
-#### Filter the styles:
-```js
-client.getGrids({type: 'game', id: 2590, styles: ['material','blurred']})
-    .then((output) => {
-        console.log(output);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+```ts
+// 220 = https://store.steampowered.com/app/220/HalfLife_2/
+const grids = await client.getGridsBySteamAppId(220);
+```
 
-// And if you like to do things the other way:
+### Filter styles:
+```ts
+const grids = await client.getGrids({type: 'game', id: 2590, styles: ['material','blurred']});
+```
+
+```ts
 client.getGridsBySteamAppId(220, ['material','blurred'])
-    .then((output) => {
-        console.log(output);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
 ```
 
-The getGrid*() methods give us an output like this:
+<details>
+    <summary>Output</summary>
+
 ```json
 [
   {
@@ -174,92 +162,42 @@ The getGrid*() methods give us an output like this:
   }
 ]
 ```
-#### Do something with the grid output:
-```js
-const SGDB = require('steamgriddb');
-const request = require('request');
-const fs = require('fs');
+</details>
 
-const client = new SGDB('my_api_key');
-client.getGridsBySteamAppId(220, ['blurred'])
-    .then((output) => {
-        // Save each Blurred Half-Life 2 grid to disk
-        output.forEach((grid) => {
-            request(grid.url).pipe(fs.createWriteStream(`grid-${grid.id}.png`));
-        });
-    });
-```
-
-## Other methods
-#### Vote on grids:
-```js
-// Upvote a grid
-client.voteGrid({direction: 'up', id: 80}) // 80 = Grid ID
-    .then((res) => {
-        console.log(res); // true/false
-    });
-
-// Downvote the same grid
-client.voteGrid({direction: 'down', id: 80}) // 80 = Grid ID
-    .then((res) => {
-        console.log(res); // true/false
-    });
-    
-// Alternatively:
-client.upvoteGrid(80)
-    .then((res) => {
-        console.log(res); // true/false
-    });
-client.downvoteGrid(80)
-    .then((res) => {
-        console.log(res); // true/false
-    });
-```
-
-#### Upload a grid:
-```js
-// Upload a blurred grid to Half-Life 2 (2254)
-client.uploadGrid(2254, 'blurred', fs.createReadStream(__dirname + '/grid.png'))
-    .then((res) => {
-        console.log(res);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-```
-
-#### Delete grids:
-```js
+### Delete grids:
+```ts
 // Delete a grid
-client.deleteGrids(80)
-    .then((res) => {
-        console.log(res);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+const success = await client.deleteGrids(80);
+```
 
+```ts
 // Delete multiple grids
-client.deleteGrids([80,81,82,83])
-    .then((res) => {
-        console.log(res);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+const success = client.deleteGrids([80,81,82,83]);
 ```
 
 #### Handling errors:
-```js
-// Try to delete a grid you don't own
-client.deleteGrids(34312)
-    .then((res) => {
-        console.log(res); // you don't own the grid so this wont happen
-    })
-    .catch((err) => {
-        console.log(err.message); // "This grid isn't yours."
+SteamGridDB throws an [AxiosError](https://axios-http.com/docs/handling_errors) when an error occurs, with the message 
+altered to contain the message returned from SteamGridDB. All methods and properties available in an AxiosError
+are available, such as `error.request` and `error.response`.
 
-        // If needed, you can access the response object with err.response
-        console.log(err.response.statusCode); // 403
-    });
+```ts
+// Get grids for a game that doesn't exist
+let grids;
+
+try {
+    grids = await SGDB.getGrids({dimensions: ["460x215", "920x430"], ...{type, id: 0}});
+} catch (error) {
+    console.log(error.message); // "Game not found."
+    console.log(err.response.status); // 404
+};
+```
+
+```ts
+// Try to delete a grid you don't own
+try {
+    await client.deleteGrids(34312);
+} catch (error) {
+    console.log(error.message); // "This grid isn't yours."
+    console.log(err.response.status); // 403
+}
 ```

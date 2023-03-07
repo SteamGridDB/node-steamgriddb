@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "module": "ES2020",
+        "target": "es2022",
+        "moduleResolution": "node16",
+        "declaration": true,
+        "outDir": "./dist",
+        "noImplicitAny": false,
+        "strictNullChecks": false,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "strictPropertyInitialization": false,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+    },
+    "include": [
+        "src/**/*"
+    ]
+}
