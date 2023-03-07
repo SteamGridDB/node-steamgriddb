@@ -1,7 +1,7 @@
 {
     "env": {
         "commonjs": true,
-        "es2021": true,
+        "es6": true,
         "node": true
     },
     "extends": [
@@ -10,29 +10,35 @@
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "impliedStrict": true
+        }
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
+    "plugins": ["@typescript-eslint/eslint-plugin"],
     "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
+        "indent": ["error", 4, {"SwitchCase": 1}],
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"],
+        "no-console": "off",
+        "curly": "warn",
+        "arrow-parens": ["error", "always"],
+        "array-bracket-spacing": ["error", "never"],
+        "object-curly-spacing": ["error", "never"],
+        "brace-style": ["error", "1tbs"],
+        "comma-dangle": ["error", "never"],
+        "@typescript-eslint/strictNullChecks": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {"argsIgnorePattern": "^(req|res|props|next|e)$"}
+        ],
+        "@typescript-eslint/explicit-function-return-type": ["error"],
+        "no-else-return": "error"
     }
 }
