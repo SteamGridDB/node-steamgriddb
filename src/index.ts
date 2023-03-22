@@ -38,7 +38,9 @@ export interface SGDBImageOptions {
     mimes?: string[];
     types?: string[];
     nsfw?: string;
+    epilepsy?: string;
     humor?: string;
+    oneoftag?: string;
     page?: number;
 }
 
@@ -116,7 +118,7 @@ export default class SGDB {
             return response.data.data ?? response.data.success;
         }
 
-        const error = new axios.AxiosError("helooooo");
+        const error = new axios.AxiosError();
         error.message = response.data?.errors?.join(", ") ?? "Unknown SteamGridDB error.";
         throw error;
     }
