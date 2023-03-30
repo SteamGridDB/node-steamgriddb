@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="7" failures="0" errors="0" time="2.333">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-03-22T21:48:37" time="2.225" tests="7">
-    <testcase classname=" should retrieve by steam appid" name=" should retrieve by steam appid" time="0.021">
+<testsuites name="jest tests" tests="7" failures="0" errors="0" time="2.219">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-03-30T22:17:48" time="2.125" tests="7">
+    <testcase classname=" should retrieve by steam appid" name=" should retrieve by steam appid" time="0.033">
     </testcase>
-    <testcase classname=" should retrieve by game id" name=" should retrieve by game id" time="0.025">
+    <testcase classname=" should retrieve by game id" name=" should retrieve by game id" time="0.029">
     </testcase>
-    <testcase classname=" should be searchable" name=" should be searchable" time="0.03">
+    <testcase classname=" should be searchable" name=" should be searchable" time="0.032">
     </testcase>
-    <testcase classname=" should retrieve by steam appid" name=" should retrieve by steam appid" time="0.031">
+    <testcase classname=" should retrieve by steam appid" name=" should retrieve by steam appid" time="0.014">
     </testcase>
     <testcase classname=" should be filterable for style" name=" should be filterable for style" time="0.03">
     </testcase>
