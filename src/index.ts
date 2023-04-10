@@ -49,7 +49,7 @@ interface SGDBQueryParams {
 }
 
 /**
- * Node.js compatible wrapper for the SteamGridDB API.
+ * JavaScript wrapper for the SteamGridDB API.
  */
 export default class SGDB {
     private readonly key:string;
