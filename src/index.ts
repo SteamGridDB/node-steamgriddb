@@ -22,6 +22,8 @@ export interface SGDBImage {
     thumb: URL;
     tags: string[];
     author: SGDBAuthor;
+    language: string;
+    notes: string|null;
 }
 
 export interface SGDBOptions {
