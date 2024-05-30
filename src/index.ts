@@ -172,7 +172,7 @@ export default class SGDB {
      * @param parmas Optional request parameters.
      * @returns A promise resolving to the game's information.
      */
-    async getGameById(id:number, params?):Promise<SGDBGame> {
+    async getGameById(id:number, params?: SGDBGetGameOptions):Promise<SGDBGame> {
         return this.getGame({type: "id", id: id}, params);
     }
 
@@ -182,7 +182,7 @@ export default class SGDB {
      * @param params Optional request parameters.
      * @returns A promise resolving to the game's information.
      */
-    async getGameBySteamAppId(id:number, params?):Promise<SGDBGame> {
+    async getGameBySteamAppId(id:number, params?: SGDBGetGameOptions):Promise<SGDBGame> {
         return this.getGame({type: "steam", id: id}, params);
     }
 
