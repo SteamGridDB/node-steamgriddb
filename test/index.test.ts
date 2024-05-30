@@ -25,6 +25,19 @@ it("should retrieve by game id", async () => {
     expect(response).toEqual(mockResponse);
 });
 
+it("should retrieve platform data", async () => {
+    const mockResponse = "{\"id\":10602,\"name\":\"Team Fortress 2\",\"types\":[\"steam\"],\"verified\":true,\"external_platform_data\": {\"steam\": [{\"id\": \"440\"}]}";
+    nock("https://www.steamgriddb.com")
+        .get("/api/v2/games/id/10602?platformdata=steam")
+        .reply(200, {"success": true, "data": mockResponse});
+
+    const response = await client.getGameById(10602,{
+        platformdata: ["steam"]
+    });
+    console.log("response", response);
+    expect(response).toEqual(mockResponse);
+});
+
 it("should be searchable", async () => {
     const mockResponse = "[{\"id\":10602,\"name\":\"Team Fortress 2\",\"types\":[\"steam\"],\"verified\":true},{\"id\":31520,\"name\":\"Team Fortress 2008\",\"types\":[\"steam\"],\"verified\":true},{\"id\":1706,\"name\":\"Team Fortress Classic\",\"types\":[\"steam\"],\"verified\":true},{\"id\":13797,\"name\":\"Team Fortress 2 Beta\",\"types\":[\"steam\"],\"verified\":true},{\"id\":655,\"name\":\"Escape from Fortress Lugohm\",\"types\":[\"steam\"],\"verified\":true}]";
 

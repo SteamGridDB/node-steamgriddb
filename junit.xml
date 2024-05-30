@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="7" failures="0" errors="0" time="2.219">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2023-03-30T22:17:48" time="2.125" tests="7">
-    <testcase classname=" should retrieve by steam appid" name=" should retrieve by steam appid" time="0.033">
+<testsuites name="jest tests" tests="8" failures="0" errors="0" time="2.438">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2024-05-30T04:00:13" time="2.276" tests="8">
+    <testcase classname=" should retrieve by steam appid" name=" should retrieve by steam appid" time="0.045">
     </testcase>
-    <testcase classname=" should retrieve by game id" name=" should retrieve by game id" time="0.029">
+    <testcase classname=" should retrieve by game id" name=" should retrieve by game id" time="0.024">
     </testcase>
-    <testcase classname=" should be searchable" name=" should be searchable" time="0.032">
+    <testcase classname=" should retrieve platform data" name=" should retrieve platform data" time="0.031">
     </testcase>
-    <testcase classname=" should retrieve by steam appid" name=" should retrieve by steam appid" time="0.014">
+    <testcase classname=" should be searchable" name=" should be searchable" time="0.029">
     </testcase>
-    <testcase classname=" should be filterable for style" name=" should be filterable for style" time="0.03">
+    <testcase classname=" should retrieve by steam appid" name=" should retrieve by steam appid" time="0.015">
     </testcase>
-    <testcase classname=" should be filterable for nsfw" name=" should be filterable for nsfw" time="0.03">
+    <testcase classname=" should be filterable for style" name=" should be filterable for style" time="0.014">
     </testcase>
-    <testcase classname=" should be deletable" name=" should be deletable" time="0.03">
+    <testcase classname=" should be filterable for nsfw" name=" should be filterable for nsfw" time="0.029">
+    </testcase>
+    <testcase classname=" should be deletable" name=" should be deletable" time="0.029">
     </testcase>
   </testsuite>
 </testsuites>

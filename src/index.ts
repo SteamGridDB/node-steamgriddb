@@ -46,6 +46,10 @@ export interface SGDBImageOptions {
     page?: number;
 }
 
+export interface SGDBGetGameOptions {
+    platformdata: string[]
+}
+
 interface SGDBQueryParams {
     [key: string]: string;
 }
@@ -84,7 +88,7 @@ export default class SGDB {
     }
 
     private buildQuery(options: any): SGDBQueryParams {
-        const multiParams = ["styles", "dimensions", "mimes", "types"];
+        const multiParams = ["styles", "dimensions", "mimes", "types","platformdata"];
         const singleParams = ["nsfw", "humor", "epilepsy", "oneoftag", "page"];
         const params = {};
 
@@ -151,29 +155,35 @@ export default class SGDB {
 
     /**
      * Gets information for a game.
-     * @param options The SGDB request options
+     * @param options The SGDB request options.
+     * @param params Optional request parameters.
      * @returns A promise resolving to the game's information.
      */
-    async getGame(options):Promise<SGDBGame> {
+    async getGame(options: {type: string, id: number}, params?: SGDBGetGameOptions):Promise<SGDBGame> {
+        if(params) {
+            return await this.handleRequest("get", `/games/${options.type}/${options.id}`, this.buildQuery(params));
+        }
         return await this.handleRequest("get", `/games/${options.type}/${options.id}`);
     }
 
     /**
      * Gets information for a game given its id.
      * @param id The game's id.
+     * @param parmas Optional request parameters.
      * @returns A promise resolving to the game's information.
      */
-    async getGameById(id:number):Promise<SGDBGame> {
-        return this.getGame({type: "id", id: id});
+    async getGameById(id:number, params?):Promise<SGDBGame> {
+        return this.getGame({type: "id", id: id}, params);
     }
 
     /**
      * Gets information for a steam game given its id.
      * @param id The game's id.
+     * @param params Optional request parameters.
      * @returns A promise resolving to the game's information.
      */
-    async getGameBySteamAppId(id:number):Promise<SGDBGame> {
-        return this.getGame({type: "steam", id: id});
+    async getGameBySteamAppId(id:number, params?):Promise<SGDBGame> {
+        return this.getGame({type: "steam", id: id}, params);
     }
 
     /**
@@ -289,7 +299,7 @@ export default class SGDB {
             humor: humor
         });
     }
-  
+
     /**
      * Gets a list of heroes based on the provided steam game id and filters.
      * @param id The game's id.
@@ -362,7 +372,7 @@ export default class SGDB {
             humor: humor
         });
     }
-  
+
     /**
      * Gets a list of icons based on the provided steam game id and filters.
      * @param id The game's id.
