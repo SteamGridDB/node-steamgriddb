@@ -6,6 +6,9 @@ export default {
     coverageDirectory: "./coverage",
     coveragePathIgnorePatterns: ["node_modules", "src/database", "src/test", "src/types"],
     reporters: ["default", "jest-junit"],
-    globals: {"ts-jest": {diagnostics: false}},
-    transform: {}
+    transform: {
+        "^.+\\.ts$": ["ts-jest", {
+            diagnostics: false
+        }]
+    }
 };

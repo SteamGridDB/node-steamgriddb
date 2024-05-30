@@ -1,5 +1,5 @@
 import {OutgoingHttpHeaders} from "http";
-import axios from "axios";
+import axios, {AxiosRequestConfig} from "axios";
 
 export interface SGDBGame {
     id: number;
@@ -129,7 +129,7 @@ export default class SGDB {
         let response;
 
         try {
-            response = await axios(options);
+            response = await axios(options as AxiosRequestConfig);
         } catch (error) {
             error.message = error.response.data?.errors?.join(", ") ?? error.message;
             throw error;
