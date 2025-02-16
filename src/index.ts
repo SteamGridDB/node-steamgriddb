@@ -6,6 +6,7 @@ export interface SGDBGame {
     name: string;
     types: string[];
     verified: boolean;
+    release_date: number;
 }
 
 export interface SGDBAuthor {
@@ -24,6 +25,10 @@ export interface SGDBImage {
     author: SGDBAuthor;
     language: string;
     notes: string|null;
+    width: number;
+    height: number;
+    upvotes: number;
+    downvotes: number;
 }
 
 export interface SGDBOptions {
