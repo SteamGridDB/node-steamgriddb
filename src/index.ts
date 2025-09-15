@@ -19,8 +19,17 @@ export interface SGDBImage {
     id: number;
     score: number;
     style: string[];
+    width: number;
+    height: number;
+    nsfw: boolean;
+    humor: boolean;
+    mime: string;    
     url: URL;
     thumb: URL;
+    lock: boolean;
+    epilepsy: boolean;
+    upvotes: number;
+    downvotes: number;
     tags: string[];
     author: SGDBAuthor;
     language: string;
