@@ -31,7 +31,7 @@ it("should retrieve platform data", async () => {
         .get("/api/v2/games/id/10602?platformdata=steam")
         .reply(200, {"success": true, "data": mockResponse});
 
-    const response = await client.getGameById(10602,{
+    const response = await client.getGameById(10602, {
         platformdata: ["steam"]
     });
     expect(response).toEqual(mockResponse);
@@ -90,4 +90,43 @@ it("should be deletable", async () => {
 
     const response = await client.deleteGrids([123123]);
     expect(response).toBe(true);
+});
+
+it("should derive error message from response errors", async () => {
+    nock("https://www.steamgriddb.com")
+        .get("/api/v2/games/steam/1234")
+        .replyWithError({message: "default error msg", response: {data: {errors: ["error_0", "error_1"]}}});
+
+    expect.assertions(1);
+    try {
+        await client.getGameBySteamAppId(1234);
+    } catch (e) {
+        expect(e.message).toEqual("error_0, error_1");
+    }
+});
+
+it("should default to message returned in error", async () => {
+    nock("https://www.steamgriddb.com")
+        .get("/api/v2/games/steam/1234")
+        .replyWithError({message: "default error msg", response: {}});
+
+    expect.assertions(1);
+    try {
+        await client.getGameBySteamAppId(1234);
+    } catch (e) {
+        expect(e.message).toEqual("default error msg");
+    }
+});
+
+it("should handle undefined response object in error", async () => {
+    nock("https://www.steamgriddb.com")
+        .get("/api/v2/games/steam/1234")
+        .replyWithError({message: "default error msg"});
+
+    expect.assertions(1);
+    try {
+        await client.getGameBySteamAppId(1234);
+    } catch (e) {
+        expect(e.message).toEqual("default error msg");
+    }
 });
