@@ -24,7 +24,7 @@ export interface SGDBImage {
     tags: string[];
     author: SGDBAuthor;
     language: string;
-    notes: string | null;
+    notes: string|null;
     width: number;
     height: number;
     upvotes: number;
@@ -52,7 +52,7 @@ export interface SGDBImageOptions {
 }
 
 export interface SGDBGetGameOptions {
-    platformdata: string[];
+    platformdata: string[]
 }
 
 interface SGDBQueryParams {
@@ -63,15 +63,15 @@ interface SGDBQueryParams {
  * JavaScript wrapper for the SteamGridDB API.
  */
 export default class SGDB {
-    private readonly key: string;
-    private readonly baseURL: string;
-    private readonly headers: OutgoingHttpHeaders;
+    private readonly key:string;
+    private readonly baseURL:string;
+    private readonly headers:OutgoingHttpHeaders;
 
     /**
      * Creates a new SGDB instance.
      * @param options The api key or SGDB options.
      */
-    constructor(options: SGDBOptions | string) {
+    constructor(options:SGDBOptions | string) {
         // Allow passing just the API key as a string
         if (typeof options === "string") {
             options = {key: options};
@@ -93,7 +93,7 @@ export default class SGDB {
     }
 
     private buildQuery(options: any): SGDBQueryParams {
-        const multiParams = ["styles", "dimensions", "mimes", "types", "platformdata"];
+        const multiParams = ["styles", "dimensions", "mimes", "types","platformdata"];
         const singleParams = ["nsfw", "humor", "epilepsy", "oneoftag", "page"];
         const params = {};
 
@@ -119,7 +119,7 @@ export default class SGDB {
      * @param formData Optional form data.
      * @returns A promise resolving to the request's result.
      */
-    async handleRequest(method: string, url: string, params: SGDBQueryParams = {}, formData = null): Promise<any> {
+    async handleRequest(method:string, url:string, params:SGDBQueryParams = {}, formData = null): Promise<any> {
         let options = {
             url: `${this.baseURL}${url}`,
             headers: this.headers,
@@ -154,7 +154,7 @@ export default class SGDB {
      * @param query The search query.
      * @returns A promise resolving to a list of possible matches.
      */
-    async searchGame(query: string): Promise<SGDBGame[]> {
+    async searchGame(query: string):Promise<SGDBGame[]> {
         return await this.handleRequest("get", `/search/autocomplete/${encodeURIComponent(query)}`);
     }
 
@@ -164,8 +164,8 @@ export default class SGDB {
      * @param params Optional request parameters.
      * @returns A promise resolving to the game's information.
      */
-    async getGame(options: { type: string, id: number }, params?: SGDBGetGameOptions): Promise<SGDBGame> {
-        if (params) {
+    async getGame(options: {type: string, id: number}, params?: SGDBGetGameOptions):Promise<SGDBGame> {
+        if(params) {
             return await this.handleRequest("get", `/games/${options.type}/${options.id}`, this.buildQuery(params));
         }
         return await this.handleRequest("get", `/games/${options.type}/${options.id}`);
@@ -177,7 +177,7 @@ export default class SGDB {
      * @param parmas Optional request parameters.
      * @returns A promise resolving to the game's information.
      */
-    async getGameById(id: number, params?: SGDBGetGameOptions): Promise<SGDBGame> {
+    async getGameById(id:number, params?: SGDBGetGameOptions):Promise<SGDBGame> {
         return this.getGame({type: "id", id: id}, params);
     }
 
@@ -187,7 +187,7 @@ export default class SGDB {
      * @param params Optional request parameters.
      * @returns A promise resolving to the game's information.
      */
-    async getGameBySteamAppId(id: number, params?: SGDBGetGameOptions): Promise<SGDBGame> {
+    async getGameBySteamAppId(id:number, params?: SGDBGetGameOptions):Promise<SGDBGame> {
         return this.getGame({type: "steam", id: id}, params);
     }
 
@@ -196,7 +196,7 @@ export default class SGDB {
      * @param options The SGDB request options.
      * @returns A promise resolving to the game's grids.
      */
-    async getGrids(options: SGDBImageOptions): Promise<SGDBImage[]> {
+    async getGrids(options:SGDBImageOptions):Promise<SGDBImage[]> {
         return await this.handleRequest("get", `/grids/${options.type}/${options.id}`, this.buildQuery(options));
     }
 
@@ -212,14 +212,14 @@ export default class SGDB {
      * @returns A promise resolving to a list of grids for the desired game matching the provided filters.
      */
     async getGridsById(
-        id: number,
-        styles?: string[],
-        dimensions?: string[],
-        mimes?: string[],
-        types?: string[],
-        nsfw?: string,
-        humor?: string
-    ): Promise<SGDBImage[]> {
+        id:number,
+        styles?:string[],
+        dimensions?:string[],
+        mimes?:string[],
+        types?:string[],
+        nsfw?:string,
+        humor?:string
+    ):Promise<SGDBImage[]> {
         return this.getGrids({
             type: "game",
             id: id,
@@ -244,14 +244,14 @@ export default class SGDB {
      * @returns A promise resolving to a list of grids for the desired steam game matching the provided filters.
      */
     async getGridsBySteamAppId(
-        id: number,
-        styles?: string[],
-        dimensions?: string[],
-        mimes?: string[],
-        types?: string[],
-        nsfw?: string,
-        humor?: string
-    ): Promise<SGDBImage[]> {
+        id:number,
+        styles?:string[],
+        dimensions?:string[],
+        mimes?:string[],
+        types?:string[],
+        nsfw?:string,
+        humor?:string
+    ):Promise<SGDBImage[]> {
         return this.getGrids({
             type: "steam",
             id: id,
@@ -269,7 +269,7 @@ export default class SGDB {
      * @param options The SGDB request options.
      * @returns A promise resolving to the game's heros.
      */
-    async getHeroes(options: SGDBImageOptions): Promise<SGDBImage[]> {
+    async getHeroes(options:SGDBImageOptions):Promise<SGDBImage[]> {
         return await this.handleRequest("get", `/heroes/${options.type}/${options.id}`, this.buildQuery(options));
     }
 
@@ -342,7 +342,7 @@ export default class SGDB {
      * @param options The SGDB request options.
      * @returns A promise resolving to the game's icons.
      */
-    async getIcons(options: SGDBImageOptions): Promise<SGDBImage[]> {
+    async getIcons(options:SGDBImageOptions):Promise<SGDBImage[]> {
         return await this.handleRequest("get", `/icons/${options.type}/${options.id}`, this.buildQuery(options));
     }
 
@@ -415,7 +415,7 @@ export default class SGDB {
      * @param options The SGDB request options.
      * @returns A promise resolving to the game's logos.
      */
-    async getLogos(options: SGDBImageOptions): Promise<SGDBImage[]> {
+    async getLogos(options:SGDBImageOptions):Promise<SGDBImage[]> {
         return await this.handleRequest("get", `/logos/${options.type}/${options.id}`, this.buildQuery(options));
     }
 
@@ -488,7 +488,7 @@ export default class SGDB {
      * @param ids Id or list of ids of grids to delete.
      * @returns A promise resolving to true if the operation succeeded.
      */
-    async deleteGrids(ids: number | number[]): Promise<boolean> {
+    async deleteGrids(ids:number|number[]):Promise<boolean> {
         const gridIds = Array.isArray(ids) ? ids.join(",") : ids.toString();
 
         return await this.handleRequest("delete", `/grids/${Array.isArray(gridIds) ? gridIds.join(",") : gridIds}`);

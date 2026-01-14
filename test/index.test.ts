@@ -31,7 +31,7 @@ it("should retrieve platform data", async () => {
         .get("/api/v2/games/id/10602?platformdata=steam")
         .reply(200, {"success": true, "data": mockResponse});
 
-    const response = await client.getGameById(10602, {
+    const response = await client.getGameById(10602,{
         platformdata: ["steam"]
     });
     expect(response).toEqual(mockResponse);
