@@ -136,7 +136,7 @@ export default class SGDB {
         try {
             response = await axios(options as AxiosRequestConfig);
         } catch (error) {
-            error.message = error.response.data?.errors?.join(", ") ?? error.message;
+            error.message = error.response?.data?.errors?.join(", ") ?? error.message;
             throw error;
         }
 
